@@ -1,0 +1,992 @@
+pre {
+    background-color: var(--code-bg);
+    color: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto; /* Si una línea es muy larga, añade barra de desplazamiento */
+    font-family: "Consolas", monospace;
+    font-size: 0.9rem;
+    border-left: 4px solid #cac5da;
+}
+
+/* Este truco elimina los saltos de línea artificiales dentro de una misma etiqueta */
+pre code br {
+    display: none;
+}
+pre code {
+    display: block;
+    white-space: pre-line !important; /* Mantiene saltos de línea pero elimina las sangrías gigantes */
+    text-align: left;
+}
+
+
+:root {
+  --bg-main: #b8beca;
+  --bg-card: #ffffff;
+  --primary: #f8fafc;
+  --accent: #ff4757;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --code-bg: #1e1e1e;
+  --tech-java: #e0f2fe;
+  --tech-java-text: #0369a1;
+  --tech-sql: #fef3c7;
+  --tech-sql-text: #b45309;
+  /* EL COLOR DE LAS LETRAS EN MODO CLARO (Blanco para que resalte sobre el w3-blue) */
+  --texto-titulo: #ffffff;
+}
+
+body {
+  font-family:
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ==================================================
+   SIDEBAR - MODO CLARO
+   ================================================== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  --sidebar-bg: #e8eef6;
+  --sidebar-text: #1e293b;
+  --sidebar-muted: #64748b;
+  --sidebar-link: #2563eb;
+  --sidebar-hover: #dbeafe;
+  --sidebar-active: #bfdbfe;
+
+  width: 280px;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================================================
+   SIDEBAR - MODO OSCURO
+   ================================================== */
+
+.dark-mode .sidebar {
+  --sidebar-bg: #0f172a;
+  --sidebar-text: #f8fafc;
+  --sidebar-muted: #94a3b8;
+  --sidebar-link: #38bdf8;
+  --sidebar-hover: #334155;
+  --sidebar-active: #1e40af;
+
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ENCABEZADO */
+
+.sidebar-header h1 {
+  font-size: 1.9rem;
+  margin: 0 0 5px 0;
+  color: var(--sidebar-link);
+}
+
+.sidebar-header p {
+  font-size: 1.1rem;
+  color: var(--sidebar-muted);
+  margin: 0 0 20px 0;
+}
+
+.sidebar-header .horizontal-flow {
+  padding: 5px;
+  font-size: 1rem;
+  color: var(--sidebar-muted);
+  background: transparent;
+  border: none;
+}
+
+/* NAVEGACIÓN */
+
+.demo-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.demo-nav a {
+  color: var(--sidebar-link);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* EFECTO HOVER */
+
+.demo-nav a:hover {
+  background-color: var(--sidebar-hover);
+  color: var(--sidebar-text);
+}
+
+/* ELEMENTO ACTIVO */
+
+.demo-nav a.active {
+  background-color: var(--sidebar-active);
+  color: var(--sidebar-text);
+  font-weight: bold;
+}
+/* hasta aqui   --------------------------------------------------------   */
+.accessibility-controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding-top: 15px;
+  border-top: 1px solid #334155;
+}
+
+.accessibility-controls button {
+  background: #334155;
+  border: none;
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  transition: background 0.2s;
+}
+
+.project-conclusion {
+  margin-top: 5px;
+}
+
+.accessibility-controls button:hover {
+  background: #475569;
+}
+
+/* ==================================================
+   CONTENEDOR PRINCIPAL
+   ================================================== */
+
+.main-content {
+  flex: 1 1 auto;
+  width: calc(100% - 280px);
+  min-width: 0;
+  margin-left: 280px;
+  padding: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+}
+
+
+.slide-card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 35px;
+  margin-bottom: 40px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+}
+
+.slide-card h2 {
+  margin-top: 0;
+  color: #ebe713;
+  font-size: 1.6rem;
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 12px;
+}
+
+/* Bloques de Etiquetas Técnicas */
+.tech-badge-container {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+}
+.badge {
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.badge-java {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+.badge-web {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+.badge-sql {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+/* Contenedores de Información Destacada */
+.box-java-architecture {
+  background-color: var(--tech-java);
+  border-left: 4px solid var(--tech-java-text);
+  color: var(--tech-java-text);
+  padding: 15px;
+  border-radius: 6px;
+  margin: 15px 0;
+  font-size: 1.25rem;
+}
+
+.box-sql-architecture {
+  background-color: var(--tech-sql);
+  border-left: 4px solid var(--tech-sql-text);
+  color: var(--tech-sql-text);
+  padding: 15px;
+  border-radius: 6px;
+  margin: 15px 0;
+  font-size: 1.25rem;
+}
+
+/* Flujo Horizontal Compacto */
+.horizontal-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  background: #f8fafc;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.horizontal-flow-main {
+  margin-top: 15px;
+}
+.flow-node {
+  background: var(--primary);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.flow-separator {
+  color: var(--accent);
+  font-weight: bold;
+}
+
+/* Soporte de Modo Oscuro a través de Clases */
+.dark-mode {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --primary: #1e1e20;
+  --text-dark: #f8fafc;
+  --tech-java: #0c4a6e;
+  --tech-java-text: #38bdf8;
+  --tech-sql: #451a03;
+  --tech-sql-text: #fbbf24;
+  --code-bg: #020617;
+  /* EL COLOR DE LAS LETRAS EN MODO OSCURO (Blanco platino luminoso) */
+  --texto-titulo: #f8fafc;
+}
+.dark-mode .slide-card {
+  border-color: #334155;
+}
+.dark-mode .horizontal-flow {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+/* TABLAS W3.CSS: CORRECCIÓN DEL TEXTO EN MODO OSCURO */
+/* TABLAS W3.CSS: MODO OSCURO */
+.dark-mode table.w3-table-all,
+.dark-mode table.w3-table-all th,
+.dark-mode table.w3-table-all td {
+  color: #f8fafc !important;
+  background-color: #1e293b !important;
+  border-color: #475569 !important;
+}
+
+/* ==================================================
+   Modo oscuro para todos los paneles w3-note
+   ================================================== */
+
+/* PANELES w3-note: MODO OSCURO */
+
+.dark-mode .w3-note {
+  background-color: var(--bg-card) !important;
+  color: var(--text-dark) !important;
+}
+
+/* CONTENIDO INTERNO DE LOS PANELES w3-note */
+
+.dark-mode .w3-note p,
+.dark-mode .w3-note strong,
+.dark-mode .w3-note code {
+  color: var(--text-dark) !important;
+}
+
+/* ==================================================
+   Modo oscuro para paneles de advertencia
+   ================================================== */
+   
+.dark-mode .w3-panel.w3-pale-yellow {
+  background-color: var(--bg-card) !important;
+  color: var(--text-dark) !important;
+}
+
+.dark-mode .w3-panel.w3-pale-yellow p,
+.dark-mode .w3-panel.w3-pale-yellow strong,
+.dark-mode .w3-panel.w3-pale-yellow code {
+  color: var(--text-dark) !important;
+}
+
+/* ==================================================
+   Modo oscuro para código inline W3.CSS
+   ================================================== */
+.dark-mode code.w3-codespan {
+  background-color: var(--code-bg) !important;
+  color: var(--tech-java-text) !important;
+  border-radius: 4px;
+}
+
+/* ----------------------------------------- */
+.project-conclusion-label {
+  margin-top: 25px;
+  font-weight: bold;
+  color: var(--text-muted);
+}
+
+/* Reglas de Impresión */
+@media print {
+  .sidebar {
+    display: none !important;
+  }
+  .main-content {
+    width: 100% !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    background: white;
+  }
+  .slide-card {
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    border: none;
+  }
+}
+
+/* ===================================================== */
+/*   CONTROL MODULAR UNIFICADO: CONEXIÓN JS + W3.CSS     */
+/* ===================================================== */
+/* Modificaciones nuevo uso */
+.mi-titulo {
+  text-align: center; /* Centra el texto */
+  border-bottom: 5px solid navy; /* Añade un borde inferior azul marino */
+  border-radius: 8px; /* Redondea las esquinas */
+  font-size: 1.2em; /* Aumenta el tamaño de la fuente */
+  font-weight: 700; /* 👈 Modifica el grosor del texto */
+}
+
+/* 1. TÍTULO DE LA LECCIÓN (Especificidad h1 para ganar a W3.CSS) */
+h1.mi-titulo {
+  text-align: center !important;
+  border-bottom: 5px solid navy !important; /* Azul marino en Modo Claro */
+  border-radius: 8px !important;
+  color: var(--text-dark) !important; /* Hereda el color oscuro base */
+  font-size: 1.6em; /* Aumenta el tamaño de la fuente */
+}
+
+/* 2. CAMBIO AUTOMÁTICO DEL TÍTULO EN MODO OSCURO (JS) */
+body.dark-mode h1.mi-titulo {
+  border-bottom-color: #94a3b8 !important; /* El borde inferior pasa a gris neutro */
+  color: var(--text-dark) !important; /* Pasa a blanco brillante por tu JS */
+}
+
+/* 3. PANEL CONTENEDOR DE LA DIAPOSITIVA (HERENCIA DE PROPIEDADES) */
+.slide-card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 35px;
+  margin-bottom: 40px;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e2e8f0;
+
+  /* Fuerza el color de la fuente a todo el contenido de la lección */
+  color: var(--text-dark) !important;
+  scroll-margin-top: 80px;  /* AJUSTAR EL PUNTO DE LLEGADA DE CADA LECCIÓN */
+}
+
+/*  mi linea de separación de lecciones */
+/* Línea horizontal personalizada */
+.mi-linea {
+  border: none; /* Elimina el borde predeterminado */
+  height: 3px; /* Altura de la línea */
+  background-color: rgb(101, 228, 16); /* Color de fondo de la línea */
+  width: 80%; /* Ancho de la línea */
+  margin: 20px auto; /* Centra la línea horizontalmente */
+}
+
+/* ==================================================
+   W3.CSS GRID: ÁREAS CON NOMBRE
+   ================================================== */
+
+/* Contenedor principal de la cuadrícula */
+.mygrid {
+  display: grid;
+
+  /* Distribución de los elementos por áreas:
+       cabecera: ocupa las dos columnas
+       navegación y contenido: una columna cada uno
+       pie: ocupa las dos columnas */
+  grid-template-areas:
+    "header header"
+    "nav main"
+    "footer footer";
+
+  /* Primera columna fija; segunda flexible */
+  grid-template-columns: 150px 1fr;
+
+  /* Separación entre filas y columnas */
+  gap: 10px;
+}
+
+/* Asignamos cada elemento a su área */
+.myheader {
+  grid-area: header;
+}
+
+.mynav {
+  grid-area: nav;
+}
+
+.mymain {
+  grid-area: main;
+}
+
+.myfooter {
+  grid-area: footer;
+}
+
+/* En pantallas estrechas, apilamos las áreas */
+@media (max-width: 600px) {
+  .mygrid {
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "footer";
+
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Borde inferior de la pestaña activa en la cuadrícula  ejercicio 36*/
+.grid-tab-selected {
+  border-bottom: 4px solid red !important;
+}
+
+/* ==================================================
+   BLOQUES AZULES EXPLICATIVOS EN MODO OSCURO
+   ================================================== */
+
+.dark-mode .w3-pale-blue {
+  background-color: #100f47 !important;
+  color: #e6edf3 !important;
+}
+
+.dark-mode .w3-border-blue {
+  border-color: #64b5f6 !important;
+}
+
+/* =========================================================
+   Espaciado y esquinas para mis bloques explicativos 
+       ========================================================= */
+
+
+.w3-pale-blue {
+    border-radius: 8px;                /* Esquinas redondeadas idénticas */
+    padding-top: 1.2rem !important;    /* Espacio vacío interno arriba */
+    padding-bottom: 1.2rem !important; /* Espacio vacío interno abajo */
+    padding-left: 1.5rem !important;   /* Separación del borde izquierdo */
+    padding-right: 1.5rem !important;  /* Separación del borde derecho */
+}
+
+/* ==================================================
+   HEADER PRINCIPAL
+   ================================================== */
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  padding: 25px;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.header-title h1 {
+  margin-top: 0;
+  color: var(--texto-titulo);
+}
+
+.header-title p {
+  color: #94a3b8;
+}
+
+/* ==================================================
+   BUSCADOR DE LECCIONES
+   ================================================== */
+
+.lesson-search {
+  margin-top: 20px;
+}
+
+.lesson-search label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#lessonSearch {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 16px;
+  font-size: 1rem;
+
+  border: 1px solid #64748b;
+  border-radius: 8px;
+
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+
+  outline: none;
+}
+
+#lessonSearch:focus {
+  border-color: #38bdf8;
+}
+
+/* ==================================================
+   HEADER PRINCIPAL - MODO CLARO
+   ================================================== */
+
+.main-header {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  padding: 25px;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.header-title h1 {
+  margin-top: 0;
+  color: var(--primary);
+}
+
+.header-title p {
+  color: #64748b;
+}
+
+/* BUSCADOR */
+
+.lesson-search {
+  margin-top: 20px;
+}
+
+.lesson-search label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+#lessonSearch {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1e293b;
+  outline: none;
+}
+
+#lessonSearch:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ==================================================
+   HEADER PRINCIPAL - MODO OSCURO
+   ================================================== */
+
+.dark-mode .main-header {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  border-bottom-color: #334155;
+}
+
+.dark-mode .header-title h1 {
+  color: var(--texto-titulo);
+}
+
+.dark-mode .header-title p {
+  color: #94a3b8;
+}
+
+.dark-mode .lesson-search label {
+  color: var(--text-dark);
+}
+
+.dark-mode #lessonSearch {
+  background-color: var(--code-bg);
+  color: var(--text-dark);
+  border-color: #475569;
+}
+
+.dark-mode #lessonSearch::placeholder {
+  color: #94a3b8;
+}
+
+.dark-mode #lessonSearch:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* ==================================================
+   Mantén la pestaña por debajo del sidebar
+   ================================================== */
+
+.search-panel {
+  position: relative;
+  z-index: 10;
+}
+
+/* ==================================================
+   CABECERA DESPLEGABLE
+   ================================================== */
+
+.main-header {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  border-bottom: 1px solid #cbd5e1;
+}
+
+/* PESTAÑA VISIBLE */
+.header-toggle {
+  width: 100%;
+  padding: 15px 25px;
+  border: none;
+  background-color: transparent;
+  color: var(--text-dark);
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-toggle:hover {
+  background-color: rgba(100, 116, 139, 0.12);
+}
+/* ICONO DE LA CABECERA DESPLEGABLE */
+.header-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+/* Girar el icono cuando se despliega el contenido */
+.header-toggle[aria-expanded="true"] .header-arrow {
+  transform: rotate(180deg);
+}
+
+/* CONTENIDO DESPLEGABLE */
+.header-content {
+  display: none;
+  padding: 20px 25px;
+}
+
+.header-content.active {
+  display: block;
+}
+
+/* TÍTULO */
+.header-title h1 {
+  margin-top: 0;
+}
+
+/* BUSCADOR */
+.lesson-search label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#lessonSearch {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 16px;
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #1e293b;
+  font-size: 1rem;
+}
+
+/* MODO OSCURO */
+.dark-mode .main-header {
+  border-bottom-color: #334155;
+}
+
+.dark-mode #lessonSearch {
+  background-color: var(--code-bg);
+  color: var(--text-dark);
+  border-color: #475569;
+}
+
+/* =========================================================
+   PIE DE PÁGINA (FOOTER)
+   ========================================================= */
+
+.main-footer {
+    width: 100%;
+    margin-top: 40px;
+    background-color: var(--bg-card);
+    color: var(--text-dark);
+    text-align: center;
+    border-top: 1px solid #cbd5e1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* CONTENIDO PRINCIPAL */
+.footer-content {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.footer-content h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.footer-content p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* FRANJA INFERIOR */
+.footer-bottom {
+    padding: 18px 20px;
+    border-top: 1px solid #cbd5e1;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-bottom p {
+    margin: 5px 0;
+}
+
+/* DESTACAR AUTORÍA */
+.footer-bottom p:first-child {
+    font-weight: bold;
+}
+
+/* MODO OSCURO */
+.dark-mode .main-footer {
+    border-top-color: #334155;
+}
+
+.dark-mode .footer-bottom {
+    border-top-color: #334155;
+}
+
+/* =========================================================
+   Mi pieza: morado pálido de los divs explicativos 
+   ========================================================= */
+
+
+.w3-pale-purple {
+    background-color: #e6ccff;
+    color: #000;
+    border-radius: 8px; /* Agrega esto para redondear las esquinas */
+    border-color: #9933ff !important;  /* Morado vivo para el borde en modo claro */
+    padding-top: 1rem !important;    /* Espacio vacío interno arriba */
+    padding-bottom: 1rem !important; /* Espacio vacío interno abajo */
+    padding-left: 1.5rem !important;   /* Separación del borde morado izquierdo */
+    padding-right: 1.5rem !important;  /* Separación del borde derecho */
+}
+/* Modo oscuro: morado oscuro */
+.dark-mode .w3-pale-purple {
+    background-color: #4b306b;
+    color: #fff;
+    border-radius: 8px;
+    border-color: #ba85ff !important;  /* Morado brillante para que resalte sobre el fondo oscuro */
+    padding-top: 1.5rem !important;    /* Espacio vacío interno arriba */
+    padding-bottom: 1.5rem !important; /* Espacio vacío interno abajo */
+    padding-left: 1.5rem !important;   /* Separación del borde morado izquierdo */
+    padding-right: 1.5rem !important;  /* Separación del borde derecho */
+}
+
+/* =========================================================
+   Boton buscarlecciones: estilo interactivo y animado
+   ========================================================= */
+
+
+/* 1. Transforma el botón para que grite "¡Soy un buscador interactivo!" */
+.header-toggle {
+  background-color: #ffffff; /* Fondo blanco para que destaque sobre el fondo de la página */
+  color: #1a1a1a; /* Texto oscuro y legible */
+  border: 2px solid #e6ccff; /* Tu morado pálido para enmarcarlo */
+  border-radius: 12px; /* Esquinas redondeadas elegantes */
+  padding: 14px 20px; /* Buen espacio interno para que sea un blanco fácil de clicar */
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%; /* O el ancho que prefieras para tu cabecera */
+  
+  /* Alineación perfecta: Texto a la izquierda, flecha a la derecha */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave para darle relieve y que flote */
+  transition: all 0.25s ease; /* Transición suave para los efectos */
+}
+
+/* 2. Efecto cuando el usuario pasa el ratón por encima (Hover) */
+.header-toggle:hover {
+  background-color: #f7f0ff; /* Fondo morado extremadamente sutil */
+  border-color: #c299ff; /* El borde morado se intensifica */
+  box-shadow: 0 6px 12px rgba(179, 128, 255, 0.2); /* Resplandor morado suave */
+  transform: translateY(-1px); /* Pequeño salto hacia arriba que simula que es un botón físico */
+}
+
+/* 3. Estilo para el contenedor de la flecha SVG */
+.header-arrow {
+  display: flex;
+  align-items: center;
+  color: #8a8a8a; /* Color gris neutro para la flecha por defecto */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+}
+
+/* El toque de color para el SVG al pasar el ratón */
+.header-toggle:hover .header-arrow {
+  color: #b380ff; /* La flecha se vuelve morada al hacer hover */
+}
+
+/* 4. ANIMACIÓN DINÁMICA: Cuando tu JS cambie aria-expanded a "true" */
+.header-toggle[aria-expanded="true"] {
+  background-color: #e6ccff; /* Se vuelve completamente de tu color morado pálido */
+  border-color: #b380ff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna para efecto "hundido" */
+}
+
+/* Girar el SVG original que pusiste cuando esté abierto */
+.header-toggle[aria-expanded="true"] .header-arrow {
+  transform: rotate(180deg); /* Tu SVG apunta hacia arriba automáticamente */
+  color: #000000; /* Flecha negra contrastada */
+}
+
+/* Dark Mode */
+/* Cuando el cuerpo de la página tiene activado el modo oscuro */
+.dark-mode .header-toggle {
+  background-color: #1e1e1e;
+  color: #f1f1f1;
+  border-color: #4a3b5c;
+}
+
+.dark-mode .header-toggle:hover {
+  background-color: #2d2538;
+  border-color: #b380ff;
+}
+
+.dark-mode .header-toggle[aria-expanded="true"] {
+  background-color: #3d2b54;
+  border-color: #b380ff;
+}
+
+/* =========================================================
+   Estilos para etiqueta : Resultado visual
+   ========================================================= */
+
+/* Modo Claro (por defecto) */
+.cabecera-resultado {
+  margin-top: 15px;
+  margin-bottom: 15px; /* Espacio inferior para separarlo del siguiente bloque */
+  background-color: #808000;
+  color: #ffffff;
+}
+
+/* Modo Oscuro */
+body.dark-mode .cabecera-resultado {
+  background-color: #556B2F;
+  color: #f1f1f1;
+}
+
+/* ==================================================
+   Fix: Desplegable dentro de w3-bar (Diapositiva s31)
+   ================================================== */
+
+.w3-bar {
+  overflow: visible !important;
+}
+
+.w3-bar .w3-dropdown-hover {
+  position: relative !important;
+}
+
+/* ==================================================
+   Fix: w3-animate-left (Diapositiva s34)
+   ================================================== */
+/* 2. Asegura que el elemento animado tenga el contexto correcto respecto al flujo */
+.w3-animate-left {
+  position: relative !important;
+  z-index: 10; /* Evita que quede oculto detrás del menú lateral (sidebar) */
+}
+
+
+/* Una clase única que no chocará con tu menú lateral */
+.animar-entrada-contenido {
+    position: relative;
+    animation: entrarDesdeIzquierda 0.5s ease-out forwards;
+}
+
+@keyframes entrarDesdeIzquierda {
+    from { 
+        transform: translateX(-50px); /* Se mueve ligeramente desde la izquierda */
+        opacity: 0; 
+    }
+    to { 
+        transform: translateX(0); 
+        opacity: 1; 
+    }
+}
