@@ -1001,3 +1001,23 @@ body.dark-mode .cabecera-resultado {
         opacity: 1; 
     }
 }
+
+/* ==================================================
+   DISEÑO RESPONSIVE - DISPOSITIVOS MÓVILES
+   ================================================== */
+
+@media (max-width: 768px) {
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+}
