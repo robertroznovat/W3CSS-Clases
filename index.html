@@ -21,8 +21,19 @@
 </head>
 
 <body>
+   <!-- BOTÓN MENÚ: SOLO MÓVILES -->
+<button class="menu-toggle"
+        id="menuToggle"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="sidebar">
+  ☰
+</button>
+<!-- FONDO OSCURO DEL MENÚ -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
   <!-- BARRA LATERAL (FIJA) -->
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <!-- mi cabecera del sidebar -->
     <div class="sidebar-header">
       <h1>W3.CSS Tutorial</h1>
