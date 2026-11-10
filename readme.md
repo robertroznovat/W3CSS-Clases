@@ -41,7 +41,9 @@ El contenido está organizado en lecciones para facilitar el aprendizaje progres
 
 ## 📂 Estructura del proyecto
 
+
 W3CSS-Clases/
+...
 │
 ├── .github/
 │   └── workflows/
