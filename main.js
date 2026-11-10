@@ -836,3 +836,43 @@ function w3_open() {
 function w3_close() {
     document.getElementById("mySidebars35").style.display = "none";
 }
+
+/* ==================================================
+   SIDEBAR - CONTROL DE NAVEGACIÓN MÓVIL
+   ================================================== */
+
+const sidebar = document.getElementById("sidebar");
+const menuToggle = document.getElementById("menuToggle");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+function toggleSidebar() {
+  const abierto = sidebar.classList.toggle("is-open");
+
+  sidebarOverlay.classList.toggle("is-visible", abierto);
+
+  menuToggle.setAttribute("aria-expanded", abierto);
+  menuToggle.setAttribute(
+    "aria-label",
+    abierto ? "Cerrar menú" : "Abrir menú"
+  );
+}
+
+function cerrarSidebar() {
+  sidebar.classList.remove("is-open");
+  sidebarOverlay.classList.remove("is-visible");
+  menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Abrir menú");
+}
+
+menuToggle.addEventListener("click", toggleSidebar);
+sidebarOverlay.addEventListener("click", cerrarSidebar);
+
+sidebar.querySelectorAll(".demo-nav a").forEach(enlace => {
+  enlace.addEventListener("click", cerrarSidebar);
+});
+
+document.addEventListener("keydown", evento => {
+  if (evento.key === "Escape") {
+    cerrarSidebar();
+  }
+});
