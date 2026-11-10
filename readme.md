@@ -41,7 +41,7 @@ El contenido está organizado en lecciones para facilitar el aprendizaje progres
 
 ## 📂 Estructura del proyecto
 
-
+```text
 W3CSS-Clases/
 ...
 │
@@ -59,7 +59,7 @@ W3CSS-Clases/
 ├── bootstrap-icons-1.13.2/
 │
 └── img/
-
+```
 ## ▶️ Ejecución
 
 El proyecto es una aplicación web estática.
@@ -85,6 +85,7 @@ Se irán incorporando y perfeccionando las explicaciones y los ejemplos práctic
 Este proyecto tiene una finalidad exclusivamente educativa y de consulta personal.
 
 Su propósito es facilitar el aprendizaje de W3.CSS mediante ejemplos reales, código comentado y explicaciones en castellano.
+
 ## 🙏 Agradecimientos y reconocimiento
 
 Este proyecto se apoya en recursos y herramientas que han contribuido a su desarrollo y elaboración.
